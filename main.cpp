@@ -293,15 +293,48 @@ void display()
 
 	/* Limpa todos os pixels da tela */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPushMatrix();
+	glPushMatrix(); // comeco do carro
 		polarView();
-		glColor3d(0, 0, 1);
-		glutSolidCylinder(2, 8, 1000, 400);
-		glTranslatef(0, -2, 0);
+
+		glColor3d(0, 0.7, 0.88); // comeco da cor no meio
+		glutSolidCylinder(4, 16, 100, 100); // comeco da cor no meio
+		
+		glTranslatef(0, -5, 0); // comeco da roda da frente
 		glRotatef(90, 0, 1, 0);
 		glColor3d(0, 0, 0);
-		glutSolidTorus(0.20, 0.35, 2000, 400);
-	glPopMatrix();
+		glutSolidTorus(0.75, 1.525, 100, 100); // fim da roda da frente
+		
+		glTranslatef(0, 5, 0); // comeco da ponta do carro
+		glRotatef(90, 0, 1, 0);
+		glColor3d(0, 0, 0.5);
+		glutSolidCone(4, 12, 100, 100); // fim da ponta do carro
+		
+		glRotatef(180, 0, 1, 0); // comeco da cor no centro/costa
+		glTranslatef(0, 0, 16);
+		glColor3d(1, 1, 1);
+		glutSolidCylinder(4, 35, 100, 100); // fim da cor no centro/costa
+
+		glTranslatef(0, 4, 20); // comeco da cabine
+		glRotatef(45, 0, 0, 1);
+		glColor3d(1, 1, 1);
+		glutSolidCylinder(5.7, 15, 4, 4); // fim da cabine
+
+		glRotatef(-45, 0, 0, 1); // comeco da crina
+		glTranslatef(0, 5.6, 2.5);
+		glRotatef(45, 0, 0, 1);
+		glColor3d(0, 0.7, 0.88);
+		glutSolidCylinder(2, 10, 4, 4); // fim da crina
+
+		glRotatef(-45, 0, 0, 1); // comeco da roda direita
+		glTranslatef(5.7, -14, 6);
+		glRotatef(90, 0, 1, 0);
+		glColor3d(0, 0, 0);
+		glutSolidTorus(2, 3, 100, 100); // fim da roda direita
+
+		glTranslatef(0, 0, -11.4); // comeco da roda esquerda
+		glColor3d(0, 0, 0);
+		glutSolidTorus(2, 3, 100, 100); // fim da roda esquerda
+	glPopMatrix(); // fim do carro
 
 	glutSwapBuffers();
 }
@@ -400,7 +433,7 @@ void init(void)
 
 	// Define a cor de fundo da janela de visualização como branca
 
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
 
 	// Habilita a definição da cor do material a partir da cor corrente
 
