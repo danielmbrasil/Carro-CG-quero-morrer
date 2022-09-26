@@ -293,6 +293,13 @@ void display()
 
 	/* Limpa todos os pixels da tela */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glPushMatrix(); // comeco do chao
+		glTranslatef(0, -60, 0);
+		glColor3d(0, 1, 0);
+		glutSolidCube(100);
+	glPopMatrix(); // fim do chao
+
 	glPushMatrix(); // comeco do carro
 		polarView();
 
@@ -302,7 +309,7 @@ void display()
 		glTranslatef(0, -5, 0); // comeco da roda da frente
 		glRotatef(90, 0, 1, 0);
 		glColor3d(0, 0, 0);
-		glutSolidTorus(0.75, 1.525, 100, 100); // fim da roda da frente
+		glutSolidTorus(1.5, 2, 100, 100); // fim da roda da frente
 		
 		glTranslatef(0, 5, 0); // comeco da ponta do carro
 		glRotatef(90, 0, 1, 0);
@@ -335,6 +342,14 @@ void display()
 		glColor3d(0, 0, 0);
 		glutSolidTorus(2, 3, 100, 100); // fim da roda esquerda
 	glPopMatrix(); // fim do carro
+
+
+	glPushMatrix(); // comeco da Arvore
+		glTranslatef(0, -15, 20);
+		glRotatef(90, -1, 0, 0);
+		glColor3d(0.39, 0.26, 0.13);
+		glutSolidCylinder(5, 100, 100, 20);	
+	glPopMatrix(); // fim da Arvore
 
 	glutSwapBuffers();
 }
