@@ -37,7 +37,7 @@ void DefineIluminacao(void)
 
 	GLfloat luzEspecular[4] = {1.0, 1.0, 1.0, 1.0}; // "brilho"
 
-	GLfloat posicaoLuz[4] = {0.0, 50.0, 50.0, 1.0};
+	GLfloat posicaoLuz[4] = {0.0, 500.0, 50.0, 1.0};
 
 	// Capacidade de brilho do material
 
@@ -276,23 +276,22 @@ void Reshape(GLsizei w, GLsizei h)
 	EspecificaParametrosVisualizacao();
 }
 
-void mouseWheel(int button, int dir, int x, int y) {
-    if (dir > 0) {
-        distance += 20;
-    } else {
-        distance -= 20;
-    }
-}
-
 // adicionar as formas a serem mostradas na cena
 void display()
 {
 	const double a = glutGet(GLUT_ELAPSED_TIME) / 10;
-	GLfloat lightPosition[4] = {0, 0, 0, 1};
 	GLfloat yellow[4] = {1, 1, 0, 1};
 
 	/* Limpa todos os pixels da tela */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	DefineIluminacao();
+
+	glPushMatrix(); // comeco do chao
+		glTranslatef(0, -510, 0);
+		glColor3d(0, 1, 0);
+		glutSolidCube(1000);
+	glPopMatrix(); // fim do chao
+
 	glPushMatrix(); // comeco do carro
 		polarView();
 
@@ -302,7 +301,7 @@ void display()
 		glTranslatef(0, -5, 0); // comeco da roda da frente
 		glRotatef(90, 0, 1, 0);
 		glColor3d(0, 0, 0);
-		glutSolidTorus(0.75, 1.525, 100, 100); // fim da roda da frente
+		glutSolidTorus(1.5, 2, 100, 100); // fim da roda da frente
 		
 		glTranslatef(0, 5, 0); // comeco da ponta do carro
 		glRotatef(90, 0, 1, 0);
@@ -317,13 +316,13 @@ void display()
 		glTranslatef(0, 4, 20); // comeco da cabine
 		glRotatef(45, 0, 0, 1);
 		glColor3d(1, 1, 1);
-		glutSolidCylinder(5.7, 15, 4, 4); // fim da cabine
+		glutSolidCylinder(5.7, 15, 4, 100); // fim da cabine
 
 		glRotatef(-45, 0, 0, 1); // comeco da crina
 		glTranslatef(0, 5.6, 2.5);
 		glRotatef(45, 0, 0, 1);
 		glColor3d(0, 0.7, 0.88);
-		glutSolidCylinder(2, 10, 4, 4); // fim da crina
+		glutSolidCylinder(2, 10, 4, 100); // fim da crina
 
 		glRotatef(-45, 0, 0, 1); // comeco da roda direita
 		glTranslatef(5.7, -14, 6);
@@ -335,6 +334,49 @@ void display()
 		glColor3d(0, 0, 0);
 		glutSolidTorus(2, 3, 100, 100); // fim da roda esquerda
 	glPopMatrix(); // fim do carro
+
+
+	glPushMatrix(); // comeco da Arvore
+
+		glTranslatef(40, -15, 20); // comeco do tronco
+		glRotatef(90, -1, 0, 0);
+		glColor3d(0.39, 0.26, 0.13);
+		glutSolidCylinder(5, 100, 100, 20);	// fim do tronco
+
+
+		glRotatef(90, 1, 0, 0); // comeco das folhas
+		glTranslatef(0, 100, 10);
+		glColor3d(0, 1, 0);
+		glutSolidSphere(20,100,100);
+		glTranslatef(0, 0, -20);
+		glutSolidSphere(20,100,100);
+		glTranslatef(10, 0, 10);
+		glutSolidSphere(20,100,100);
+		glTranslatef(-20, 0, 0);
+		glutSolidSphere(20,100,100);
+		glTranslatef(10, 20, 0);
+		glutSolidSphere(20,100,100); // fim das folhas
+
+	glPopMatrix(); // fim da Arvore
+
+	glPushMatrix(); // comeco do poste
+		glTranslatef(-40, -15, 20); // comeco do tronco
+		glRotatef(90, -1, 0, 0);
+		glColor3d(0.5, 0.5, 0.5);
+		glutSolidCylinder(2, 50, 100, 20);	// fim do tronco
+
+		glRotatef(90, 1, 0, 0); // comeco do lugar da lampada
+		glTranslatef(2.5, 50, 0);
+		glScalef(1.5, 0.333, 1);
+		glutSolidCube(5); // fim do lugar da lampada
+
+		glScalef(0.75, 3, 1); // comeco da lampada
+		glTranslatef(1.5, -1, 0);
+		glColor3d(1, 1, 0);
+		glutSolidSphere(1, 10, 10); // fim da lampada
+	glPopMatrix(); // fim do poste
+
+
 
 	glutSwapBuffers();
 }
@@ -433,7 +475,7 @@ void init(void)
 
 	// Define a cor de fundo da janela de visualização como branca
 
-	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+	glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
 
 	// Habilita a definição da cor do material a partir da cor corrente
 
@@ -517,8 +559,6 @@ int main(int argc, char **argv)
 	// Registra a função callback para eventos de movimento do mouse
 
 	glutMotionFunc(GerenciaMovim);
-
-	glutMouseWheelFunc(mouseWheel);
 
 	// Chama a função responsável por fazer as inicializações
 
