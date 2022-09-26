@@ -37,7 +37,7 @@ void DefineIluminacao(void)
 
 	GLfloat luzEspecular[4] = {1.0, 1.0, 1.0, 1.0}; // "brilho"
 
-	GLfloat posicaoLuz[4] = {0.0, 50.0, 50.0, 1.0};
+	GLfloat posicaoLuz[4] = {0.0, 500.0, 50.0, 1.0};
 
 	// Capacidade de brilho do material
 
@@ -280,7 +280,6 @@ void Reshape(GLsizei w, GLsizei h)
 void display()
 {
 	const double a = glutGet(GLUT_ELAPSED_TIME) / 10;
-	GLfloat lightPosition[4] = {0, 0, 0, 1};
 	GLfloat yellow[4] = {1, 1, 0, 1};
 
 	/* Limpa todos os pixels da tela */
@@ -359,6 +358,8 @@ void display()
 		glutSolidSphere(20,100,100); // fim das folhas
 
 	glPopMatrix(); // fim da Arvore
+
+	glPushMatrix(); // comeco do poste
 		glTranslatef(-40, -15, 20); // comeco do tronco
 		glRotatef(90, -1, 0, 0);
 		glColor3d(0.5, 0.5, 0.5);
@@ -372,11 +373,10 @@ void display()
 		glScalef(0.75, 3, 1); // comeco da lampada
 		glTranslatef(1.5, -1, 0);
 		glColor3d(1, 1, 0);
-		glutSolidSphere(1, 10, 10);
-
-	glPushMatrix(); // comeco do poste
-
+		glutSolidSphere(1, 10, 10); // fim da lampada
 	glPopMatrix(); // fim do poste
+
+
 
 	glutSwapBuffers();
 }
@@ -475,7 +475,7 @@ void init(void)
 
 	// Define a cor de fundo da janela de visualização como branca
 
-	glClearColor(0.0f, 1.0f, 0.0f, 1.0f);
+	glClearColor(0.53f, 0.81f, 0.92f, 1.0f);
 
 	// Habilita a definição da cor do material a partir da cor corrente
 
