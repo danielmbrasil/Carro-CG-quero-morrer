@@ -37,7 +37,7 @@ void DefineIluminacao(void)
 
 	GLfloat luzEspecular[4] = {1.0, 1.0, 1.0, 1.0}; // "brilho"
 
-	GLfloat posicaoLuz[4] = {0.0, 500.0, 50.0, 1.0};
+	GLfloat posicaoLuz[4] = {20.0, 150.0, 50.0, 1.0};
 
 	// Capacidade de brilho do material
 
@@ -291,6 +291,12 @@ void display()
 		glColor3d(0, 1, 0);
 		glutSolidCube(1000);
 	glPopMatrix(); // fim do chao
+
+	glPushMatrix(); //  comeco do sol
+		glTranslatef(20, 150, 100);
+		glColor3d(1, 1, 0.2);
+		glutSolidSphere(25, 100, 100);
+	glPopMatrix(); // fim do sol
 
 	glPushMatrix(); // comeco do carro
 		polarView();
