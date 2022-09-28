@@ -292,6 +292,12 @@ void display()
 		glutSolidCube(1000);
 	glPopMatrix(); // fim do chao
 
+	glPushMatrix(); //  comeco do sol
+		glTranslatef(20, 150, 100);
+		glColor3d(1, 1, 0.2);
+		glutSolidSphere(25, 100, 100);
+	glPopMatrix(); // fim do sol
+
 	glPushMatrix(); // comeco do carro
 		polarView();
 
@@ -378,7 +384,8 @@ void display()
 
 	glPushMatrix(); // comeco do ceu nublado
 
-	glTranslatef(0, 50, 0); //comeco de prototipo de nuvem
+	glTranslatef(0, 100, 0); //comeco de prototipo de nuvem
+	glutSolidSphere(10,100, 100);
 
 	glPopMatrix(); // fim do ceu nublado
 
