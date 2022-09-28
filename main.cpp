@@ -288,7 +288,7 @@ void display()
 
 	glPushMatrix(); // comeco do chao
 		glTranslatef(0, -510, 0);
-		glColor3d(0, 1, 0);
+		glColor3d(0, 0.5, 0);
 		glutSolidCube(1000);
 	glPopMatrix(); // fim do chao
 
@@ -385,7 +385,45 @@ void display()
 	glPushMatrix(); // comeco do ceu nublado
 
 	glTranslatef(0, 100, 0); //comeco de prototipo de nuvem
-	glutSolidSphere(10,100, 100);
+	glColor3d(1, 1, 1);
+	glutSolidSphere(10, 100, 100);
+	glPushMatrix(); // comeco camada 2
+		glTranslatef(5, 0, 5);
+		glutSolidSphere(10, 100, 100);
+		glTranslatef(-10, 0, 0);
+		glutSolidSphere(10, 100, 100);
+		glPushMatrix(); // comeco camada 3
+			glTranslatef(15, 0, 5);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+
+			glTranslatef(20, 0, 5);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+
+			glTranslatef(20, 0, 5);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+			glTranslatef(-10, 0, 0);
+			glutSolidSphere(10, 100, 100);
+
+		glPopMatrix(); // fim camada 3
+		glTranslatef(10, 0, 20);
+		glutSolidSphere(10, 100, 100);
+		glTranslatef(-10, 0, 0);
+		glutSolidSphere(10, 100, 100);
+	glPopMatrix(); // fim camada 2
+	glTranslatef(0, 0, 30);
+	glutSolidSphere(10, 100, 100);
+
+
 
 	glPopMatrix(); // fim do ceu nublado
 
