@@ -324,6 +324,11 @@ void display()
 		glColor3d(1, 1, 1);
 		glutSolidCylinder(5.7, 15, 4, 100); // fim da cabine
 
+		
+		glTranslatef(0, 0, -0.1); // comeco da janela
+		glColor3d(0, 0.8, 0.9);
+		glutSolidCylinder(5.8, 5, 4, 100); // fim da janela
+
 		glRotatef(-45, 0, 0, 1); // comeco da crina
 		glTranslatef(0, 5.6, 2.5);
 		glRotatef(45, 0, 0, 1);
