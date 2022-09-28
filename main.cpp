@@ -292,6 +292,12 @@ void display()
 		glutSolidCube(1000);
 	glPopMatrix(); // fim do chao
 
+	glPushMatrix(); //  comeco do sol
+		glTranslatef(20, 150, 100);
+		glColor3d(1, 1, 0.2);
+		glutSolidSphere(25, 100, 100);
+	glPopMatrix(); // fim do sol
+
 	glPushMatrix(); // comeco do carro
 		polarView();
 
