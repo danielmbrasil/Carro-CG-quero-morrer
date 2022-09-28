@@ -37,7 +37,7 @@ void DefineIluminacao(void)
 
 	GLfloat luzEspecular[4] = {1.0, 1.0, 1.0, 1.0}; // "brilho"
 
-	GLfloat posicaoLuz[4] = {0.0, 500.0, 50.0, 1.0};
+	GLfloat posicaoLuz[4] = {20.0, 150.0, 50.0, 1.0};
 
 	// Capacidade de brilho do material
 
@@ -323,6 +323,11 @@ void display()
 		glRotatef(45, 0, 0, 1);
 		glColor3d(1, 1, 1);
 		glutSolidCylinder(5.7, 15, 4, 100); // fim da cabine
+
+		
+		glTranslatef(0, 0, -0.1); // comeco da janela
+		glColor3d(0, 0.8, 0.9);
+		glutSolidCylinder(5.8, 5, 4, 100); // fim da janela
 
 		glRotatef(-45, 0, 0, 1); // comeco da crina
 		glTranslatef(0, 5.6, 2.5);
