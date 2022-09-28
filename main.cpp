@@ -376,7 +376,12 @@ void display()
 		glutSolidSphere(1, 10, 10); // fim da lampada
 	glPopMatrix(); // fim do poste
 
+	glPushMatrix(); // comeco do ceu nublado
 
+	glTranslatef(0, 100, 0); //comeco de prototipo de nuvem
+	glutSolidSphere(10,100, 100);
+
+	glPopMatrix(); // fim do ceu nublado
 
 	glutSwapBuffers();
 }
