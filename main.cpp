@@ -143,8 +143,49 @@ void display() {
 		glutSolidSphere(25, 100, 100);
 	glPopMatrix(); // end of sun
 
+	glPushMatrix(); // truck
+		polarView();
+
+		glColor3d(1, 0, 0); // back of truck
+		glTranslated(0, 5, 0);
+		glutSolidCube(15);
+
+		glColor3d(1, 0, 0);
+		glTranslatef(15, 0, 0);
+		glutSolidCube(15); // end of back of truck
+
+		glColor3d(1, 1, 1); // front of truck
+		glTranslatef(13.2, -2, 0);
+		glutSolidCube(10); // end of front of truck
+
+		glTranslatef(0, -5, 5); // front right wheel
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end of front right wheel
+
+		glTranslatef(0, 0, -10); // front left wheel
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end of front let wheel
+
+		glTranslatef(-28, 0, 12); // brack right wheel 1
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end brack right wheel 1
+
+		glTranslatef(-4, 0, 0); // brack right wheel 2
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end brack right wheel 2
+
+
+		glTranslatef(4, 0, -14); // brack left wheel 1
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end brack left wheel 1
+
+		glTranslatef(-4, 0, 0); // brack left wheel 2
+		glColor3d(0, 0, 0);
+		glutSolidTorus(1, 1, 100, 100); // end brack left wheel 2
+	glPopMatrix(); // end of truck
+
 	glPushMatrix(); // pole
-		glTranslatef(40, -15, 20);
+		glTranslatef(40, -10, 20);
 		glRotatef(90, -1, 0, 0);
 		glColor3d(0.5, 0.5, 0.5);
 		glutSolidCylinder(3, 100, 100, 20);
@@ -238,7 +279,7 @@ void init() {
 	rotY = 10;
 	obsX = 20;
 	obsY = 0;
-	obsZ = 400;
+	obsZ = 100;
 }
 
 int main(int argc, char **argv) {
