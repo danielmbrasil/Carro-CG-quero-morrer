@@ -124,9 +124,6 @@ void Reshape(GLsizei w, GLsizei h) {
 }
 
 void display() {
-	const double a = glutGet(GLUT_ELAPSED_TIME) / 10;
-	GLfloat yellow[4] = {1, 1, 0, 1};
-
 	/* Limpa todos os pixels da tela */
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	DefineIluminacao();
@@ -188,7 +185,7 @@ void display() {
 		glTranslatef(40, -10, 20);
 		glRotatef(90, -1, 0, 0);
 		glColor3d(0.5, 0.5, 0.5);
-		glutSolidCylinder(3, 100, 100, 20);
+		glutSolidCylinder(2, 50, 4, 20);
 	glPopMatrix(); // end of pole
 
 	glutSwapBuffers();
