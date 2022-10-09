@@ -174,6 +174,54 @@ void display() {
 		glutSolidCylinder(2, 50, 4, 20);
 	glPopMatrix(); // end of pole
 
+	glPushMatrix(); // cloud
+		glTranslatef(20, 150, 100);
+		glColor3d(0.8, 0.8, 0.8);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(-4.8, 4.8, 0);
+		glutSolidSphere(7, 100, 100);
+	glPopMatrix(); // end of cloud
+
+	glPushMatrix(); // cloud
+		glTranslatef(0, 130, 100);
+		glColor3d(0.8, 0.8, 0.8);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(-4.8, 4.8, 0);
+		glutSolidSphere(7, 100, 100);
+	glPopMatrix(); // end of cloud
+
+	glPushMatrix(); // cloud
+		glTranslatef(80, 140, 100);
+		glColor3d(0.8, 0.8, 0.8);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(-4.8, 4.8, 0);
+		glutSolidSphere(7, 100, 100);
+	glPopMatrix(); // end of cloud
+
+	glPushMatrix(); // cloud
+		glTranslatef(20, 150, 0);
+		glColor3d(0.8, 0.8, 0.8);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(4.8, 0, 0);
+		glutSolidSphere(7, 100, 100);
+		glTranslatef(-4.8, 4.8, 0);
+		glutSolidSphere(7, 100, 100);
+	glPopMatrix(); // end of cloud
+
 	glutSwapBuffers();
 }
 
