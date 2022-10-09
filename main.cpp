@@ -20,7 +20,9 @@ GLfloat rotX, rotY, rotX_ini, rotY_ini;
 
 GLfloat obsX, obsY, obsZ, obsX_ini, obsY_ini, obsZ_ini;
 
-GLfloat mov = 20.f;
+GLfloat truckMove = 20.f;
+GLfloat cXMove = 10.f;
+GLfloat cZMove = 0.f;
 
 int x_ini, y_ini, mouse_button;
 
@@ -80,7 +82,7 @@ void GerenciaMouse(int button, int state, int x, int y) {
 	else mouse_button = -1;
 }
 
-void GerenciaMovim(int x, int y) {
+void GerenciatruckMoveim(int x, int y) {
 	if (mouse_button == GLUT_LEFT_BUTTON) {
 		int deltax = x_ini - x;
 		int deltay = y_ini - y;
@@ -121,7 +123,7 @@ void display() {
 	glPopMatrix(); // end of ground
 
 	glPushMatrix(); // sun
-		glTranslatef(mov, 100, 100);
+		glTranslatef(truckMove, 100, 100);
 		glColor3d(1, 1, 0.2);
 		glutSolidSphere(25, 100, 100);
 	glPopMatrix(); // end of sun
@@ -130,7 +132,7 @@ void display() {
 		polarView();
 
 		glColor3d(1, 0, 0); // back of truck
-		glTranslatef(mov, 0, 0);
+		glTranslatef(truckMove, 0, 0);
 		glutSolidCube(15);
 
 		glColor3d(1, 0, 0);
@@ -222,6 +224,55 @@ void display() {
 		glutSolidSphere(7, 100, 100);
 	glPopMatrix(); // end of cloud
 
+	glPushMatrix(); // character
+		
+		// head
+		glTranslatef(cXMove, 2, cZMove);
+		glColor3d(0, 0, 1);
+		glutSolidSphere(2, 100, 100);
+
+		// body
+		glPushMatrix();
+			glTranslatef(0, -2, 0);
+			glRotatef(90, 50, 0, 0);
+			glColor3d(0, 0, 1);
+			glutSolidCylinder(2, 5, 4, 4);
+		glPopMatrix();
+
+
+		// legs
+		glPushMatrix();
+			glTranslatef(-1, -7, 0);
+			glRotatef(90, 50, 0, 0);
+			glColor3d(0, 0, 1);
+			glutSolidCylinder(0.8, 5, 4, 4);
+		glPopMatrix();
+
+		glPushMatrix();
+			glTranslatef(1, -7, 0);
+			glRotatef(90, 50, 0, 0);
+			glColor3d(0, 0, 1);
+			glutSolidCylinder(0.8, 5, 4, 4);
+		glPopMatrix();
+
+		// arms
+		glPushMatrix();
+			glTranslatef(-1, -2, 0);
+			glRotatef(45, 10, 0, 0);
+			glColor3d(0, 0, 1);
+			glutSolidCylinder(0.4, 5, 4, 4);
+		glPopMatrix();
+
+		// arms
+		glPushMatrix();
+			glTranslatef(1, -2, 0);
+			glRotatef(45, 10, 0, 0);
+			glColor3d(0, 0, 1);
+			glutSolidCylinder(0.4, 5, 4, 4);
+		glPopMatrix();
+
+	glPopMatrix(); // end of character
+
 	glutSwapBuffers();
 }
 
@@ -235,10 +286,10 @@ void keySpecial(int key, int x, int y) {
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-		mov -= 5.f;
+		truckMove -= 5.f;
 		break;
 	case GLUT_KEY_RIGHT:
-		mov += 5.f;
+		truckMove += 5.f;
 		break;
 	default:
 		break;
@@ -255,7 +306,23 @@ void myKeyboard(unsigned char c, int x, int y) {
 	case 'q':
 		exit(0);
 		break;
+	case 'd':
+		cXMove += 5.f;
+		break;
+	case 'a':
+		cXMove -= 5.f;
+		break;
+	case 'w':
+		cZMove += 5.f;
+		break;
+	case 's':
+		cZMove -= 5.f;
+		break;
+	default:
+		break;
 	}
+
+	glutPostRedisplay();
 }
 
 // imprimir as coordenadas com o clique do mouse
@@ -266,7 +333,7 @@ void myMouse(int b, int s, int x, int y) {
 	}
 }
 
-// função detecta movimento do mouse e salva coordenadas
+// função detecta truckMoveimento do mouse e salva coordenadas
 void myMotion(int x, int y) {
 	printf("Motion: (%d, %d)\n", x, y);
 }
@@ -300,7 +367,7 @@ int main(int argc, char **argv) {
 	glutKeyboardFunc(myKeyboard);
 	glutSpecialFunc(keySpecial);
 	glutMouseFunc(GerenciaMouse);
-	glutMotionFunc(GerenciaMovim);
+	glutMotionFunc(GerenciatruckMoveim);
 	init();
 	glutMainLoop();
 
