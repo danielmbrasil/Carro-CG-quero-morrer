@@ -20,6 +20,8 @@ GLfloat rotX, rotY, rotX_ini, rotY_ini;
 
 GLfloat obsX, obsY, obsZ, obsX_ini, obsY_ini, obsZ_ini;
 
+GLfloat mov = 20.f;
+
 int x_ini, y_ini, mouse_button;
 
 void polarView() {
@@ -61,22 +63,6 @@ void EspecificaParametrosVisualizacao() {
 	glLoadIdentity();
 	gluPerspective(angle, fAspect, 0.5, 500);
 	PosicionaObservador();
-}
-
-void TeclasEspeciais(int tecla, int x, int y) {
-	switch (tecla) {
-
-	case GLUT_KEY_HOME:
-		if (angle >= 10) angle -= 5;
-		break;
-
-	case GLUT_KEY_END:
-		if (angle <= 150) angle += 5;
-		break;
-	}
-
-	EspecificaParametrosVisualizacao();
-	glutPostRedisplay();
 }
 
 void GerenciaMouse(int button, int state, int x, int y) {
@@ -135,7 +121,7 @@ void display() {
 	glPopMatrix(); // end of ground
 
 	glPushMatrix(); // sun
-		glTranslatef(20, 150, 100);
+		glTranslatef(mov, 100, 100);
 		glColor3d(1, 1, 0.2);
 		glutSolidSphere(25, 100, 100);
 	glPopMatrix(); // end of sun
@@ -144,7 +130,7 @@ void display() {
 		polarView();
 
 		glColor3d(1, 0, 0); // back of truck
-		glTranslated(0, 5, 0);
+		glTranslatef(mov, 0, 0);
 		glutSolidCube(15);
 
 		glColor3d(1, 0, 0);
@@ -198,19 +184,19 @@ void myReshape(int winWidth, int winHeight) {
 
 /*comandos especiais do teclado*/
 void keySpecial(int key, int x, int y) {
-	std::cout << "(" << x << ", " << y << ")" << std::endl;
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-		std::cout << "Left pressed\n" << std::endl;
+		mov -= 5.f;
 		break;
-	case GLUT_KEY_UP:
-		std::cout << "Up pressed\n" << std::endl;
+	case GLUT_KEY_RIGHT:
+		mov += 5.f;
+		break;
+	default:
 		break;
 	}
 
-	if (glutGetModifiers() == GLUT_ACTIVE_ALT) // GLUT_ACTIVE_CTRL ou SHIFT
-		std::cout << "Alt pressed\n";
+	glutPostRedisplay();
 }
 
 void myKeyboard(unsigned char c, int x, int y) {
@@ -218,31 +204,7 @@ void myKeyboard(unsigned char c, int x, int y) {
 	case 27: // ESC em ASCII
 		exit(0);
 		break;
-	case 'w':
-		incidence += 2;
-		break;
-	case 's':
-		incidence -= 2;
-		break;
-	case 'z':
-		distance++;
-		break;
-	case 'x':
-		distance--;
-		break;
-	case 'd':
-		azimuth += 5;
-		break;
-	case 'a':
-		azimuth -= 5;
-		break;
-	case 'e':
-		twist += 5;
-		break;
 	case 'q':
-		twist -= 5;
-		break;
-	case 'p':
 		exit(0);
 		break;
 	}
@@ -288,7 +250,7 @@ int main(int argc, char **argv) {
 	glutDisplayFunc(display);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(myKeyboard);
-	glutSpecialFunc(TeclasEspeciais);
+	glutSpecialFunc(keySpecial);
 	glutMouseFunc(GerenciaMouse);
 	glutMotionFunc(GerenciaMovim);
 	init();
